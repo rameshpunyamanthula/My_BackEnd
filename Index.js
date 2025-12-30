@@ -1,20 +1,21 @@
 import express from 'express';
-import StudentRouter from './routes/studentRoutes.js';
 import cors from 'cors';
-const app = express();
+import mongoose, { mongo } from 'mongoose';
+import studentRouter from './routers/studentsRouters.js';
 
-app.use('/', StudentRouter);
+const app = express();
+app.use(express.json());
 app.use(cors());
 
-app.get('/get-users',(req,res) =>{
-    res.send("Hello this is get users endpoint");
+mongoose.connect("mongodb+srv://punyamanthularamesh55:Ramesh4263@cluster0.kwungjt.mongodb.net/").then(() => console.log("db connected"))
+.catch((error) => console.log(error));
+
+app.use('/', studentRouter);
+app.get('/users', (req, res) => {
+    console.log("hello this is");
+    res.send("hello this is from backend");
 })
 
-app.post('/add-users',(req,res) =>{
-    console.log(req.body);
-    res.send("Data Added successfully");
-})
-
-app.listen(7007,() => {
-    console.log("Server is running at port 7007");
-})
+app.listen(7007, () => {
+    console.log("server running at port 7007")
+});

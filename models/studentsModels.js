@@ -7,7 +7,7 @@ const studentSchema = new mongoose.Schema({
     stdRoll : {
         type: String
     },
-    stdPhone: {
+    phone: {
         type : Number
     }
 });
